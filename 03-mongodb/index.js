@@ -1,8 +1,21 @@
-require("./config");
+
 const express = require("express");
 const mongoose = require("mongoose");
-const {contactRouter} = require("./contact.router")
+const {contactRouter} = require("./contacts/contact.router")
+const { MongoClient} = require("mongodb");
+require("dotenv").config()
 
+const dbName = 'db-contacts';
+
+async function main() {
+  try {
+    const client = await MongoClient.connect(process.env.MONGODB_URL)
+    console.log("Database connection successful")
+    const db = client.db(dbName);
+  } catch(err) {process.exit(1)}
+}
+
+main(); 
 
 module.exports = class ContactsServer {
     constructor() {

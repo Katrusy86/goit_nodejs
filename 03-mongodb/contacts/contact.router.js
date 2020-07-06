@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const Joi = require("@hapi/joi");
 Joi.objectId = require("joi-objectid")(Joi)
-const { validate } = require("./validate");
+const { validate } = require("../helpers/validate");
 const {createContact, getContacts, getContact, updateContact, deleteContact} = require("./contacts.controller")
 
 const router = Router();
