@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { Contact } = require("./auth.model");
+const { User } = require("./auth.model");
 require("dotenv").config()
 
 exports.authorizationCookies = async (req, res, next) => {
@@ -14,7 +14,7 @@ const token = req.cookies.token
     return res.status(401).send("Not authorized");
   }
 
-  const contact = await Contact.findById(payload.id)
+  const contact = await User.findById(payload.id)
 
   req.contact=contact;
   next()

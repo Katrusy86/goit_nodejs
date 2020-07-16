@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const Joi = require('@hapi/joi');
-const { register, getCurrentContact, logOut } = require('../contacts/auth.controller')
-const { logIn } = require('../contacts/auth.controller')
+const { register, getCurrentContact, logOut } = require('../users/auth.controller')
+const { logIn } = require('../users/auth.controller')
 const { validate } = require('../helper/validate');
 const { authorizationCookies } = require('./auth.middleware');
 const router = Router();
