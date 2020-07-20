@@ -1,21 +1,21 @@
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require("dotenv").config()
-const { Contact } = require('../contacts/auth.model')
+const { User } = require('../users/auth.model')
 
 const saltRounds = 5
 
 exports.register = async (req, res, next) => {
   const { email, username, password } = req.body;
 
-  const existContact = await Contact.findOne({email});
+  const existContact = await User.findOne({email});
   if (existContact) {
     return res.status(409).send('Email in use')
   }
 
   const passwordContact = await bcryptjs.hash(password, saltRounds)
 
-  const newContact = await Contact.create({
+  const newContact = await User.create({
     username,
     email,
     passwordContact
@@ -31,7 +31,7 @@ exports.register = async (req, res, next) => {
 exports.logIn = async (req, res, next) => {
     const { email, password } = req.body;
   
-    const contact = await Contact.findOne({email});
+    const contact = await User.findOne({email});
     if (!contact) {
       return res.status(400).send('Ошибка от Joi или другой валидационной библиотеки')
     }
