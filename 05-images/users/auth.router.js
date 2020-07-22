@@ -7,6 +7,11 @@ const { authorizationCookies } = require('./auth.middleware');
 const router = Router();
 const path = require("path")
 const multer = require("multer");
+const fs = require('fs');
+const Avatar = require('avatar-builder');
+
+const generalAvatar = Avatar.builder(Avatar.Image.margin(Avatar.Image.circleMask(Avatar.Image.identicon())), 128, 128);
+generalAvatar.create('gabriel').then(buffer => fs.writeFileSync('tmp/avatar-gabriel.png', buffer))
 
 const storage = multer.diskStorage({
     destination:process.env.STATIC_BASE_PATH,
